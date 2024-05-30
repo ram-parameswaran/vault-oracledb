@@ -15,15 +15,15 @@ Quick setup for testing the oracle database plugin for Hashicorp Vault on an M1 
       - Note: Perform this step on your local mac. The unzipped binaries will be passed to the docker container as volumes.
 
 ```
-curl -O https://download.oracle.com/otn_software/linux/instantclient/1917000/instantclient-basic-linux.x64-19.17.0.0.0dbru.zip
-mv instantclient-basic-linux.x64-19.17.0.0.0dbru.zip client/
-unzip client/instantclient-basic-linux.x64-19.17.0.0.0dbru.zip -d client/
-rm client/instantclient-basic-linux.x64-19.17.0.0.0dbru.zip
+curl -O https://download.oracle.com/otn_software/linux/instantclient/1923000/instantclient-basic-linux.x64-19.23.0.0.0dbru.zip
+mv instantclient-basic-linux.x64-19.23.0.0.0dbru.zip client/
+unzip client/instantclient-basic-linux.x64-19.23.0.0.0dbru.zip -d client/
+rm client/instantclient-basic-linux.x64-19.23.0.0.0dbru.zip
 
-curl -O https://releases.hashicorp.com/vault-plugin-database-oracle/0.7.0/vault-plugin-database-oracle_0.7.0_linux_amd64.zip
-mv vault-plugin-database-oracle_0.7.0_linux_amd64.zip plugin/
-unzip plugin/vault-plugin-database-oracle_0.7.0_linux_amd64.zip -d plugin/
-rm plugin/vault-plugin-database-oracle_0.7.0_linux_amd64.zip
+curl -O https://releases.hashicorp.com/vault-plugin-database-oracle/0.10.1/vault-plugin-database-oracle_0.10.1_linux_amd64.zip
+mv vault-plugin-database-oracle_0.10.1_linux_amd64.zip plugin/
+unzip plugin/vault-plugin-database-oracle_0.10.1_linux_amd64.zip -d plugin/
+rm plugin/vault-plugin-database-oracle_0.10.1_linux_amd64.zip
 ```
 - Add your vault enterprise license to a file called `license.env` in the root directory:
 
@@ -37,7 +37,7 @@ rm plugin/vault-plugin-database-oracle_0.7.0_linux_amd64.zip
 
 - Verify shared libraries are linked correctly by manually executing the plugin:
 ```
-export LD_LIBRARY_PATH=/vault/client/instantclient_19_17
+export LD_LIBRARY_PATH=/vault/client/instantclient_19_23
 /vault/plugin/vault-plugin-database-oracle
 ```
  - If you see the following message, the plugin was linked successfully:
