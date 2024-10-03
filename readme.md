@@ -78,8 +78,8 @@ exit
 `docker exec -it vault /bin/bash`
 
 ```
-sha256sum /vault/plugin/vault-plugin-database-oracle
-vault plugin register -sha256=<SHASUM256> -version=v0.7.0 database vault-plugin-database-oracle
+SHASUM256=sha256sum /vault/plugin/vault-plugin-database-oracle
+vault plugin register -sha256=$(SHASUM256) database vault-plugin-database-oracle
 vault plugin list database | grep oracle
 vault secrets enable database
 vault write database/roles/my-role \
@@ -94,6 +94,7 @@ vault write database/config/my-oracle-database \
      password="vaultpasswd" \
      allowed_roles=my-role \
      max_connection_lifetime=60s
+     verify_connection=true
 ```
 - Verify the plugin is working by generating credentials:
 
