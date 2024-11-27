@@ -1,7 +1,8 @@
 services:
   vault:
     container_name: vault
-    image: hashicorp/vault-enterprise:1.15.6-ent
+    #image: hashicorp/vault-enterprise:1.15.6-ent
+    image: 080f9a01a4ad #image id will be the result of building a docker image from https://github.com/ram-parameswaran/vault-docker
     volumes:
       - ./config.hcl:/vault/config/config.hcl
       - ./data:/opt/vault/data
@@ -14,6 +15,8 @@ services:
     environment:
       - VAULT_ADDR=http://127.0.0.1:8200
       - LD_LIBRARY_PATH=/vault/client/instantclient_19_23
+    ports:
+    - "127.0.0.1:8200:8200"
     command: vault server -config=/vault/config/config.hcl
   oracle:
     container_name: oracle-xe

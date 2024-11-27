@@ -50,8 +50,6 @@ load any plugins automatically
 ```
 vault operator init -key-shares=1 -key-threshold=1 -format=json > /vault/init.json
 
-cat /vault/init.json
-
 vault operator unseal <UNSEAL_KEY>
 
 vault login <ROOT_TOKEN>
@@ -78,8 +76,9 @@ exit
 `docker exec -it vault /bin/bash`
 
 ```
-SHASUM256=sha256sum /vault/plugin/vault-plugin-database-oracle
-vault plugin register -sha256=$(SHASUM256) database vault-plugin-database-oracle
+export SHASUM256Full=$(sha256sum /vault/plugin/vault-plugin-database-oracle)
+export SHASUM256="${SHASUM256Full%% *}"
+vault plugin register -sha256=${SHASUM256} -version=0.5.1 database vault-plugin-database-oracle
 vault plugin list database | grep oracle
 vault secrets enable database
 vault write database/roles/my-role \
