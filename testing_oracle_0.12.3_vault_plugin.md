@@ -25,7 +25,7 @@
       "Key Management Transparent Data Encryption",
       "Secrets Sync"
     ],
-    "license_id": "3dea5a15-0e91-f133-6f80-e78bcd8c772d",
+    "license_id": "hkhkjhkjhkjhkjhkjhkj",
     "performance_standby_count": 9999,
     "start_time": "2025-07-11T00:00:00Z",
     "termination_time": "2027-08-10T00:00:00Z"
