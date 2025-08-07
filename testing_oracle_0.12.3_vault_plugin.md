@@ -58,7 +58,7 @@
   }
 }
 
-Plugin location - 
+2. Plugin location - 
 
 # ls -la /vault/plugin/vault-plugin-database-oracle_0.12.3_linux_amd64/
 total 47580
@@ -72,12 +72,13 @@ drwxr-xr-x 1 501 dialout      416 Aug  6 06:17 ..
 -rw-r--r-- 1 501 dialout 15911672 Aug  6 06:14 vault-plugin-database-oracle_0.12.3+ent_linux_amd64.zip
 root@492a430bf3a6:/#
 
-register plugin - 
+3. register plugin - 
 
 vault plugin register -sha256=${SHASUM256} -version=0.12.3 
 -env VAULT_LICENSE=<license_string> database vault-plugin-database-oracle
 Success! Registered plugin: vault-plugin-database-oracle
 
+4. Testing the database config setup
 
 # vault write database/config/my-oracle-database      plugin_name=vault-plugin-database-oracle      connection_url="{{username}}/{{password}}@oracle-xe:1521/XEPDB1"      username="vault"      password="vaultpasswd"      allowed_roles=my-role      max_connection_lifetime=60s
 Error writing data to database/config/my-oracle-database: Error making API request.
@@ -87,7 +88,8 @@ Code: 400. Errors:
 
 * error creating database object: unable to initialize: rpc error: code = Internal desc = failed to initialize: the Oracle Database Secrets Engine feature requires a licensed Vault Enterprise server
 
-
+5. Logs from test
+   
 vault      | 2025-08-07T02:06:47.236Z [DEBUG] replication.index.perf: flushed dirty pages: pages_flushed=1 pages_outstanding=0
 vault      | 2025-08-07T02:06:47.760Z [DEBUG] secrets.database.database_b39f246a: pinning "vault-plugin-database-oracle" database plugin version "v0.12.3" from candidates [{database vault-plugin-database-oracle v0.12.3   eef0864b88e6bf99044fb44b15905604d6f04a6289029bb4d2ed91de8da5f776 false  0.12.3}]
 vault      | 2025-08-07T02:06:47.767Z [DEBUG] core: spawning a new plugin process: plugin_name=vault-plugin-database-oracle id=TW1YUqoKbw
