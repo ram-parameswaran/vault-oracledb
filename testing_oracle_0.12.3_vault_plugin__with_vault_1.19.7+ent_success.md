@@ -1,5 +1,5 @@
 1. Testing with Vault 1.19.7
-
+```
 # vault status
 Key                     Value
 ---                     -----
@@ -21,6 +21,7 @@ Active Since            2025-08-06T05:38:22.185036803Z
 Raft Committed Index    48714
 Raft Applied Index      48714
 Last WAL                18383
+```
 
 2. Vault license - 
 
