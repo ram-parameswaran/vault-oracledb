@@ -1,4 +1,28 @@
-1. Vault license - 
+1. Testing with Vault 1.19.7
+
+# vault status
+Key                     Value
+---                     -----
+Seal Type               shamir
+Initialized             true
+Sealed                  false
+Total Shares            1
+Threshold               1
+Version                 1.19.7+ent
+Build Date              2025-07-24T13:33:12Z
+Storage Type            raft
+Cluster Name            v-cluster
+Cluster ID              dfef02f8-c7f6-288f-58f3-4b9f69295fe7
+Removed From Cluster    false
+HA Enabled              true
+HA Cluster              https://v0:8201
+HA Mode                 active
+Active Since            2025-08-06T05:38:22.185036803Z
+Raft Committed Index    48714
+Raft Applied Index      48714
+Last WAL                18383
+
+2. Vault license - 
 
 
 # vault license get -format=json | jq .data
@@ -60,7 +84,7 @@
 }
 ```
 
-2. Plugin location - **Named the folder to be exactly the name of the zip file**
+3. Plugin location - **Named the folder to be exactly the name of the zip file**
 
 # ls -la /vault/plugin/vault-plugin-database-oracle_0.12.3+ent_linux_amd64/
 ```
@@ -75,14 +99,14 @@ drwxr-xr-x 1 501 dialout      416 Aug  6 06:17 ..
 -rw-r--r-- 1 501 dialout 15911672 Aug  6 06:14 vault-plugin-database-oracle_0.12.3+ent_linux_amd64.zip
 ```
 
-3. register plugin - Using command in the zip file tab [here](https://developer.hashicorp.com/vault/docs/plugins/register#step-2-update-the-plugin-catalog )
+4. register plugin - Using command in the zip file tab [here](https://developer.hashicorp.com/vault/docs/plugins/register#step-2-update-the-plugin-catalog )
 The version of the plugin should be exactly same as the version in the folder name i.e version for vault-plugin-database-oracle_0.12.3+ent_linux_amd64 will be 0.12.3+ent
 ```
 vault plugin register -version=0.12.3+ent database vault-plugin-database-oracle
 Success! Registered plugin: vault-plugin-database-oracle
 ```
 
-4. Logs from plugin registration test
+5. Logs from plugin registration test
 ```
 vault      | 2025-08-07T03:46:34.552Z [DEBUG] core: attempting to load database plugin as v5: name=vault-plugin-database-oracle
 vault      | 2025-08-07T03:46:34.556Z [DEBUG] core: spawning a new plugin process: plugin_name=vault-plugin-database-oracle id=gTvt9rwKxy
@@ -107,13 +131,13 @@ vault      | 2025-08-07T03:46:42.614Z [INFO]  plugin process exited: plugin="/va
 vault      | 2025-08-07T03:46:42.617Z [DEBUG] core: killed external multiplexed plugin process: plugin="/vault/plugin/vault-plugin-database-oracle_0.12.3+ent_linux_amd64/vault-plugin-database-oracle" pluginID=592
 ```
 
-5. Testing the database config setup
+6. Testing the database config setup
 ```
 vault write database/config/my-oracle-database      plugin_name=vault-plugin-database-oracle      connection_url="{{username}}/{{password}}@oracle-xe:1521/XEPDB1"      username="vault"      password="vaultpasswd"      allowed_roles=my-role      max_connection_lifetime=60s
 Success! Data written to: database/config/my-oracle-database
 ```
 
-6. Logs from Testing the database config setup
+7. Logs from Testing the database config setup
 ```
 vault      | 2025-08-07T03:48:55.262Z [DEBUG] secrets.database.database_ad70adf2: pinning "vault-plugin-database-oracle" database plugin version "v0.12.3+ent" from candidates [{database vault-plugin-database-oracle v0.12.3+ent   eef0864b88e6bf99044fb44b15905604d6f04a6289029bb4d2ed91de8da5f776 false  0.12.3+ent}]
 vault      | 2025-08-07T03:48:55.271Z [DEBUG] core: spawning a new plugin process: plugin_name=vault-plugin-database-oracle id=USXAV9ipkO
@@ -156,13 +180,13 @@ vault      | 2025-08-07T03:49:12.133Z [DEBUG] secrets.database.database_ad70adf2
 vault      | 2025-08-07T03:49:12.133Z [DEBUG] rotation-job-manager: attempting deregistering rotation job with ID if it exists (nil op otherwise): rotationID=database/config/my-oracle-database
 ```
 
-7. Testing the database role setup
+8. Testing the database role setup
 ```
 vault write database/roles/my-role     db_name=my-oracle-database     creation_statements='CREATE USER {{username}} IDENTIFIED BY "{{password}}"; GRANT CONNECT TO {{username}}; GRANT CREATE SESSION TO {{username}};'     default_ttl="1h"     max_ttl="24h"
 Success! Data written to: database/roles/my-role
 ```
 
-8. Testing the database role creds
+9. Testing the database role creds
 ```
 vault read database/creds/my-role
 Key                Value
@@ -173,7 +197,7 @@ lease_renewable    true
 password           8oDe1BYQ3Xkh1iRQaqv-
 username           V_ROOT_MY_ROLE_5ZMHLWKHEPFAPQI
 ```
-9. Logs from database role creds test
+10. Logs from database role creds test
 ```
 vault      | 2025-08-07T03:50:58.009Z [TRACE] secrets.database.database_ad70adf2.vault-plugin-database-oracle: create user: transport="" status=started
 vault      | 2025-08-07T03:50:58.814Z [DEBUG] replication.index.perf: flushed dirty pages: pages_flushed=1 pages_outstanding=0
