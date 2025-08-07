@@ -1,27 +1,4 @@
-1. Testing with Vault 1.19.7
-```
-# vault status
-Key                     Value
----                     -----
-Seal Type               shamir
-Initialized             true
-Sealed                  false
-Total Shares            1
-Threshold               1
-Version                 1.19.7+ent
-Build Date              2025-07-24T13:33:12Z
-Storage Type            raft
-Cluster Name            v-cluster
-Cluster ID              dfef02f8-c7f6-288f-58f3-4b9f69295fe7
-Removed From Cluster    false
-HA Enabled              true
-HA Cluster              https://v0:8201
-HA Mode                 active
-Active Since            2025-08-06T05:38:22.185036803Z
-Raft Committed Index    48714
-Raft Applied Index      48714
-Last WAL                18383
-```
+1. Testing success with Vault 1.19.7+ent,Vault 1.20.0+ent, Vault 1.20.1+ent
 
 2. Vault license - 
 
