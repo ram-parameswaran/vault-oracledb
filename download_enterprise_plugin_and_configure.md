@@ -1,3 +1,4 @@
+```
 root@ip-172-31-9-18:/etc/vault# mkdir oracle_client
 root@ip-172-31-9-18:/etc/vault# cd oracle_client/
 root@ip-172-31-9-18:/etc/vault/oracle_client# cd ..
@@ -99,4 +100,5 @@ root@ip-172-31-9-18:~# /etc/vault/plugins/.runtime/vault-plugin-database-oracle_
 This binary is a plugin. These are not meant to be executed directly.
 Please execute the program that consumes these plugins, which will
 load any plugins automatically
+```
 root@ip-172-31-9-18:~#
